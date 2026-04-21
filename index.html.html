@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌍 cgo-voice-db</title>
+<style>
+  body {
+    font-family: -apple-system, 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #0a0f1e, #1a0f2e);
+    color: #f0ece0;
+    margin: 0;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 32px;
+    margin: 0 0 10px;
+    background: linear-gradient(90deg, #ff88bb, #64b4fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    color: rgba(240,230,200,.55);
+    margin-bottom: 30px;
+  }
+  .card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 15px 0;
+  }
+  h2 { margin-top: 0; color: #ff88bb; }
+  code {
+    background: rgba(0,0,0,.3);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  pre {
+    background: rgba(0,0,0,.4);
+    padding: 15px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 12px;
+  }
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+  }
+  .lang-item {
+    background: rgba(255,136,187,.1);
+    border: 1px solid rgba(255,136,187,.3);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .flag { font-size: 24px; }
+  .count { font-size: 11px; color: rgba(240,230,200,.5); margin-top: 4px; }
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(240,230,200,.4);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🌍 cgo-voice-db</h1>
+  <p class="subtitle">CGO-FULI 생태계 공용 다국어 음성 번역 캐시 DB</p>
+
+  <div class="card">
+    <h2>🧠 자기 학습 구조</h2>
+    <p>사용자가 AI로 번역한 결과가 이 DB에 자동 저장되어,<br>
+    다음 사용자는 AI 호출 없이 즉시 번역 받습니다.</p>
+    <pre>사용자 1: "안녕하세요" → AI 번역 → "Hello"
+            ↓ (자동 저장)
+         cgo-voice-db
+            ↓ (캐시 적중)
+사용자 2: "안녕하세요" → 즉시 "Hello" (AI 0호출)</pre>
+  </div>
+
+  <div class="card">
+    <h2>🌐 지원 언어 (14개국)</h2>
+    <div class="lang-grid" id="langGrid">
+      <div class="lang-item"><div class="flag">🇺🇸</div><div>English</div><div class="count" id="c_en">...</div></div>
+      <div class="lang-item"><div class="flag">🇨🇳</div><div>中文</div><div class="count" id="c_zh">...</div></div>
+      <div class="lang-item"><div class="flag">🇯🇵</div><div>日本語</div><div class="count" id="c_ja">...</div></div>
+      <div class="lang-item"><div class="flag">🇻🇳</div><div>Tiếng Việt</div><div class="count" id="c_vi">...</div></div>
+      <div class="lang-item"><div class="flag">🇪🇸</div><div>Español</div><div class="count" id="c_es">...</div></div>
+      <div class="lang-item"><div class="flag">🇫🇷</div><div>Français</div><div class="count" id="c_fr">...</div></div>
+      <div class="lang-item"><div class="flag">🇩🇪</div><div>Deutsch</div><div class="count" id="c_de">...</div></div>
+      <div class="lang-item"><div class="flag">🇸🇦</div><div>العربية</div><div class="count" id="c_ar">...</div></div>
+      <div class="lang-item"><div class="flag">🇷🇺</div><div>Русский</div><div class="count" id="c_ru">...</div></div>
+      <div class="lang-item"><div class="flag">🇵🇹</div><div>Português</div><div class="count" id="c_pt">...</div></div>
+      <div class="lang-item"><div class="flag">🇮🇹</div><div>Italiano</div><div class="count" id="c_it">...</div></div>
+      <div class="lang-item"><div class="flag">🇮🇩</div><div>Indonesia</div><div class="count" id="c_id">...</div></div>
+      <div class="lang-item"><div class="flag">🇹🇭</div><div>ไทย</div><div class="count" id="c_th">...</div></div>
+      <div class="lang-item"><div class="flag">🇮🇳</div><div>हिन्दी</div><div class="count" id="c_hi">...</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📡 API 엔드포인트</h2>
+    <p><code>GET /api/get?lang=en&text=안녕하세요</code> — 캐시 조회</p>
+    <p><code>POST /api/save</code> — 새 번역 저장</p>
+    <p><code>GET /api/list?lang=en&limit=100</code> — 목록 조회</p>
+    <p><code>GET /api/stats</code> — 전체 통계</p>
+  </div>
+
+  <div class="footer">
+    © 2026 이주원 × C-19 · CGO-FULI 생태계<br>
+    특허 10-2026-0060113
+  </div>
+</div>
+
+<script>
+// 통계 자동 로드
+fetch('/api/stats')
+  .then(r => r.json())
+  .then(data => {
+    if (data.byLang) {
+      Object.entries(data.byLang).forEach(([lang, count]) => {
+        const el = document.getElementById('c_' + lang);
+        if (el) el.textContent = count + '개';
+      });
+    }
+  })
+  .catch(() => {
+    // 통계 API 아직 없을 수 있음
+  });
+</script>
+</body>
+</html>

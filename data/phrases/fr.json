@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "lang": "fr",
+  "langName": "Français",
+  "updated": "2026-04-21T00:00:00Z",
+  "count": 10,
+  "entries": {
+    "안녕하세요": {
+      "text": "Bonjour",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "감사합니다": {
+      "text": "Merci",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "죄송합니다": {
+      "text": "Désolé",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "잘 지내세요?": {
+      "text": "Comment allez-vous?",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "보고 싶어요": {
+      "text": "Tu me manques",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "사랑해요": {
+      "text": "Je t'aime",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "잘자요": {
+      "text": "Bonne nuit",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "좋은 아침": {
+      "text": "Bonjour",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "수고하세요": {
+      "text": "Bon travail",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "축하해요": {
+      "text": "Félicitations",
+      "bcp": "fr-FR",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "lang": "it",
+  "langName": "Italiano",
+  "updated": "2026-04-21T00:00:00Z",
+  "count": 10,
+  "entries": {
+    "안녕하세요": {
+      "text": "Ciao",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "감사합니다": {
+      "text": "Grazie",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "죄송합니다": {
+      "text": "Scusa",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "잘 지내세요?": {
+      "text": "Come stai?",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "보고 싶어요": {
+      "text": "Mi manchi",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "사랑해요": {
+      "text": "Ti amo",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "잘자요": {
+      "text": "Buona notte",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "좋은 아침": {
+      "text": "Buongiorno",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "수고하세요": {
+      "text": "Buon lavoro",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "축하해요": {
+      "text": "Congratulazioni",
+      "bcp": "it-IT",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    }
+  }
+}

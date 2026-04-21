@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "lang": "vi",
+  "langName": "Tiếng Việt",
+  "updated": "2026-04-21T00:00:00Z",
+  "count": 10,
+  "entries": {
+    "안녕하세요": {
+      "text": "Xin chào",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "감사합니다": {
+      "text": "Cảm ơn bạn",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "죄송합니다": {
+      "text": "Xin lỗi",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "잘 지내세요?": {
+      "text": "Bạn khỏe không?",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "보고 싶어요": {
+      "text": "Tôi nhớ bạn",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "사랑해요": {
+      "text": "Tôi yêu bạn",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "잘자요": {
+      "text": "Chúc ngủ ngon",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "좋은 아침": {
+      "text": "Chào buổi sáng",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "수고하세요": {
+      "text": "Cố gắng lên",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "축하해요": {
+      "text": "Chúc mừng",
+      "bcp": "vi-VN",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    }
+  }
+}

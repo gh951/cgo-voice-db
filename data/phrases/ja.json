@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "lang": "ja",
+  "langName": "日本語",
+  "updated": "2026-04-21T00:00:00Z",
+  "count": 10,
+  "entries": {
+    "안녕하세요": {
+      "text": "こんにちは",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "감사합니다": {
+      "text": "ありがとうございます",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "죄송합니다": {
+      "text": "すみません",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "잘 지내세요?": {
+      "text": "お元気ですか?",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "보고 싶어요": {
+      "text": "会いたいです",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "사랑해요": {
+      "text": "愛しています",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "잘자요": {
+      "text": "おやすみなさい",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "좋은 아침": {
+      "text": "おはようございます",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "수고하세요": {
+      "text": "お疲れ様です",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    },
+    "축하해요": {
+      "text": "おめでとうございます",
+      "bcp": "ja-JP",
+      "audio": null,
+      "created": "2026-04-21T00:00:00Z",
+      "hits": 0,
+      "source": "seed"
+    }
+  }
+}

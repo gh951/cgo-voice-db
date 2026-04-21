@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🌍 cgo-voice-db</title>
 <style>
+  * { box-sizing: border-box; }
   body {
     font-family: -apple-system, 'Noto Sans KR', sans-serif;
     background: linear-gradient(135deg, #0a0f1e, #1a0f2e);
@@ -13,10 +14,7 @@
     padding: 40px 20px;
     min-height: 100vh;
   }
-  .wrap {
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  .wrap { max-width: 900px; margin: 0 auto; }
   h1 {
     font-size: 32px;
     margin: 0 0 10px;
@@ -26,8 +24,24 @@
   }
   .subtitle {
     color: rgba(240,230,200,.55);
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    font-size: 14px;
   }
+  .stats-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    background: rgba(255,136,187,.1);
+    border: 1px solid rgba(255,136,187,.3);
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+  .stat b { color: #ff88bb; font-size: 18px; display: block; }
+
   .card {
     background: rgba(255,255,255,.05);
     border: 1px solid rgba(255,255,255,.1);
@@ -49,94 +63,295 @@
     overflow-x: auto;
     font-size: 12px;
   }
+
   .lang-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
     margin: 15px 0;
   }
   .lang-item {
-    background: rgba(255,136,187,.1);
-    border: 1px solid rgba(255,136,187,.3);
-    border-radius: 10px;
-    padding: 10px;
+    background: rgba(255,136,187,.08);
+    border: 1px solid rgba(255,136,187,.2);
+    border-radius: 12px;
+    padding: 14px 10px;
     text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
   }
-  .flag { font-size: 24px; }
+  .lang-item:hover {
+    background: rgba(255,136,187,.15);
+    border-color: rgba(255,136,187,.5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255,136,187,.15);
+  }
+  .lang-item.active {
+    background: rgba(100,180,250,.2);
+    border-color: rgba(100,180,250,.6);
+  }
+  .flag { font-size: 28px; margin-bottom: 4px; }
+  .lang-name { font-size: 13px; font-weight: 700; margin: 4px 0; }
   .count { font-size: 11px; color: rgba(240,230,200,.5); margin-top: 4px; }
+  .count b { color: #ff88bb; font-size: 13px; }
+
+  .detail-panel {
+    background: rgba(0,0,0,.3);
+    border: 1px solid rgba(100,180,250,.3);
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 18px;
+    display: none;
+  }
+  .detail-panel.show { display: block; }
+  .detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(255,255,255,.15);
+  }
+  .detail-title { font-size: 18px; font-weight: 700; }
+  .detail-close {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.2);
+    color: rgba(240,230,200,.6);
+    padding: 4px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .phrase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(255,255,255,.08);
+    align-items: center;
+    font-size: 13px;
+  }
+  .phrase-row:last-child { border-bottom: none; }
+  .ko-text { color: rgba(240,230,200,.8); }
+  .tr-text { color: #ffd0e4; font-weight: 600; }
+  .hits-badge {
+    background: rgba(52,211,153,.15);
+    border: 1px solid rgba(52,211,153,.3);
+    color: #34d399;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .audio-btn {
+    background: rgba(100,180,250,.15);
+    border: 1px solid rgba(100,180,250,.3);
+    color: #64b4fa;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    cursor: pointer;
+    margin-left: 4px;
+  }
+  .audio-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
   .footer {
     margin-top: 40px;
     text-align: center;
     font-size: 11px;
     color: rgba(240,230,200,.4);
   }
+  .badge {
+    display: inline-block;
+    background: rgba(251,191,36,.15);
+    border: 1px solid rgba(251,191,36,.3);
+    color: #fbbf24;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    margin-left: 5px;
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>🌍 cgo-voice-db</h1>
-  <p class="subtitle">CGO-FULI 생태계 공용 다국어 음성 번역 캐시 DB</p>
+  <p class="subtitle">CGO-FULI 생태계 · 자기 학습형 다국어 음성 번역 캐시 DB</p>
+
+  <div class="stats-bar">
+    <div class="stat">🌐 지원 언어 <b id="statLangs">14</b></div>
+    <div class="stat">📝 총 번역 <b id="statTotal">-</b></div>
+    <div class="stat">🔥 총 사용 <b id="statHits">-</b></div>
+    <div class="stat">🎵 음성 생성 <b id="statAudio">-</b></div>
+  </div>
 
   <div class="card">
-    <h2>🧠 자기 학습 구조</h2>
+    <h2>🧠 자기 학습 구조 <span class="badge">특허 #28 후보</span></h2>
     <p>사용자가 AI로 번역한 결과가 이 DB에 자동 저장되어,<br>
-    다음 사용자는 AI 호출 없이 즉시 번역 받습니다.</p>
+    다음 사용자는 AI 호출 없이 즉시 번역을 받습니다.</p>
     <pre>사용자 1: "안녕하세요" → AI 번역 → "Hello"
             ↓ (자동 저장)
          cgo-voice-db
             ↓ (캐시 적중)
-사용자 2: "안녕하세요" → 즉시 "Hello" (AI 0호출)</pre>
+사용자 2: "안녕하세요" → 즉시 "Hello" (AI 호출 0회)</pre>
   </div>
 
   <div class="card">
-    <h2>🌐 지원 언어 (14개국)</h2>
-    <div class="lang-grid" id="langGrid">
-      <div class="lang-item"><div class="flag">🇺🇸</div><div>English</div><div class="count" id="c_en">...</div></div>
-      <div class="lang-item"><div class="flag">🇨🇳</div><div>中文</div><div class="count" id="c_zh">...</div></div>
-      <div class="lang-item"><div class="flag">🇯🇵</div><div>日本語</div><div class="count" id="c_ja">...</div></div>
-      <div class="lang-item"><div class="flag">🇻🇳</div><div>Tiếng Việt</div><div class="count" id="c_vi">...</div></div>
-      <div class="lang-item"><div class="flag">🇪🇸</div><div>Español</div><div class="count" id="c_es">...</div></div>
-      <div class="lang-item"><div class="flag">🇫🇷</div><div>Français</div><div class="count" id="c_fr">...</div></div>
-      <div class="lang-item"><div class="flag">🇩🇪</div><div>Deutsch</div><div class="count" id="c_de">...</div></div>
-      <div class="lang-item"><div class="flag">🇸🇦</div><div>العربية</div><div class="count" id="c_ar">...</div></div>
-      <div class="lang-item"><div class="flag">🇷🇺</div><div>Русский</div><div class="count" id="c_ru">...</div></div>
-      <div class="lang-item"><div class="flag">🇵🇹</div><div>Português</div><div class="count" id="c_pt">...</div></div>
-      <div class="lang-item"><div class="flag">🇮🇹</div><div>Italiano</div><div class="count" id="c_it">...</div></div>
-      <div class="lang-item"><div class="flag">🇮🇩</div><div>Indonesia</div><div class="count" id="c_id">...</div></div>
-      <div class="lang-item"><div class="flag">🇹🇭</div><div>ไทย</div><div class="count" id="c_th">...</div></div>
-      <div class="lang-item"><div class="flag">🇮🇳</div><div>हिन्दी</div><div class="count" id="c_hi">...</div></div>
+    <h2>🌐 지원 언어 (카드 클릭 → 번역 목록)</h2>
+    <div class="lang-grid" id="langGrid"></div>
+
+    <div class="detail-panel" id="detailPanel">
+      <div class="detail-header">
+        <div class="detail-title" id="detailTitle">...</div>
+        <button class="detail-close" onclick="closeDetail()">닫기 ✕</button>
+      </div>
+      <div id="detailContent">
+        <p style="color: rgba(240,230,200,.5); font-size: 13px;">로딩 중...</p>
+      </div>
     </div>
   </div>
 
   <div class="card">
-    <h2>📡 API 엔드포인트</h2>
-    <p><code>GET /api/get?lang=en&text=안녕하세요</code> — 캐시 조회</p>
-    <p><code>POST /api/save</code> — 새 번역 저장</p>
-    <p><code>GET /api/list?lang=en&limit=100</code> — 목록 조회</p>
-    <p><code>GET /api/stats</code> — 전체 통계</p>
+    <h2>📡 API 구조 (GitHub Pages 정적)</h2>
+    <p>FULI / CGO MESSAGE 앱에서 JSON을 직접 fetch합니다:</p>
+    <pre>GET https://gh951.github.io/cgo-voice-db/data/phrases/en.json
+GET https://gh951.github.io/cgo-voice-db/data/phrases/zh.json
+...
+GET https://gh951.github.io/cgo-voice-db/audio/en/{hash}.mp3</pre>
+    <p style="font-size: 12px; color: rgba(240,230,200,.5); margin-top: 10px;">
+      💡 새 번역 저장은 앱에서 GitHub API로 직접 커밋합니다.
+    </p>
   </div>
 
   <div class="footer">
     © 2026 이주원 × C-19 · CGO-FULI 생태계<br>
-    특허 10-2026-0060113
+    특허 10-2026-0060113 · 특허 #28 후보: 자기 학습형 번역 캐시
   </div>
 </div>
 
 <script>
-// 통계 자동 로드
-fetch('/api/stats')
-  .then(r => r.json())
-  .then(data => {
-    if (data.byLang) {
-      Object.entries(data.byLang).forEach(([lang, count]) => {
-        const el = document.getElementById('c_' + lang);
-        if (el) el.textContent = count + '개';
-      });
+const LANGS = [
+  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'zh', name: '中文', flag: '🇨🇳' },
+  { code: 'ja', name: '日本語', flag: '🇯🇵' },
+  { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'id', name: 'Indonesia', flag: '🇮🇩' },
+  { code: 'th', name: 'ไทย', flag: '🇹🇭' },
+  { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' }
+];
+
+const BASE = './';
+const dbCache = {};
+
+function renderLangGrid() {
+  const grid = document.getElementById('langGrid');
+  grid.innerHTML = LANGS.map(L => `
+    <div class="lang-item" data-lang="${L.code}" onclick="showLangDetail('${L.code}')">
+      <div class="flag">${L.flag}</div>
+      <div class="lang-name">${L.name}</div>
+      <div class="count" id="c_${L.code}">로딩...</div>
+    </div>
+  `).join('');
+}
+
+async function loadAllCounts() {
+  let total = 0, totalHits = 0, totalAudio = 0;
+  for (const L of LANGS) {
+    try {
+      const res = await fetch(BASE + `data/phrases/${L.code}.json`);
+      if (!res.ok) throw new Error('fetch failed');
+      const db = await res.json();
+      dbCache[L.code] = db;
+      const count = Object.keys(db.entries || {}).length;
+      const hits = Object.values(db.entries || {}).reduce((s, e) => s + (e.hits || 0), 0);
+      const audioCount = Object.values(db.entries || {}).filter(e => e.audio).length;
+      total += count;
+      totalHits += hits;
+      totalAudio += audioCount;
+      const el = document.getElementById('c_' + L.code);
+      if (el) el.innerHTML = `<b>${count}</b>개 · ${hits} hits`;
+    } catch (e) {
+      const el = document.getElementById('c_' + L.code);
+      if (el) el.innerHTML = `<span style="color:#f87171;">없음</span>`;
     }
-  })
-  .catch(() => {
-    // 통계 API 아직 없을 수 있음
-  });
+  }
+  document.getElementById('statTotal').textContent = total.toLocaleString();
+  document.getElementById('statHits').textContent = totalHits.toLocaleString();
+  document.getElementById('statAudio').textContent = totalAudio.toLocaleString();
+}
+
+function showLangDetail(lang) {
+  document.querySelectorAll('.lang-item').forEach(el => el.classList.remove('active'));
+  const card = document.querySelector(`.lang-item[data-lang="${lang}"]`);
+  if (card) card.classList.add('active');
+
+  const L = LANGS.find(x => x.code === lang);
+  const db = dbCache[lang];
+  const panel = document.getElementById('detailPanel');
+  const title = document.getElementById('detailTitle');
+  const content = document.getElementById('detailContent');
+
+  title.innerHTML = `${L.flag} ${L.name} 번역 목록`;
+  panel.classList.add('show');
+
+  if (!db || !db.entries) {
+    content.innerHTML = '<p style="color:#f87171;">데이터 없음</p>';
+    return;
+  }
+
+  const entries = Object.entries(db.entries)
+    .sort((a, b) => (b[1].hits || 0) - (a[1].hits || 0));
+
+  content.innerHTML = entries.map(([ko, data]) => {
+    const audioUrl = data.audio ? `${BASE}audio/${lang}/${data.audio}` : null;
+    return `
+      <div class="phrase-row">
+        <div class="ko-text">🇰🇷 ${escapeHtml(ko)}</div>
+        <div class="tr-text">${L.flag} ${escapeHtml(data.text)}</div>
+        <div>
+          <span class="hits-badge">🔥 ${data.hits || 0}</span>
+          ${audioUrl 
+            ? `<button class="audio-btn" onclick="playAudio('${audioUrl}')">🔊</button>` 
+            : `<button class="audio-btn" disabled title="음성 미생성">🔇</button>`}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+function closeDetail() {
+  document.getElementById('detailPanel').classList.remove('show');
+  document.querySelectorAll('.lang-item').forEach(el => el.classList.remove('active'));
+}
+
+function playAudio(url) {
+  try {
+    const a = new Audio(url);
+    a.play().catch(e => alert('재생 실패: ' + e.message));
+  } catch (e) {
+    alert('재생 실패');
+  }
+}
+
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+renderLangGrid();
+loadAllCounts();
 </script>
 </body>
 </html>
